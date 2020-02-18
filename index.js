@@ -3,11 +3,27 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const { pool } = require('./config')
 
+const helmet = require('helmet')
+const compression = require('compression')
+const rateLimit = require('express-rate-limit')
+const { body, check } = require('express-validator')
+
+const isProduction = process.env.NODE_ENV === 'production'
+const origin = {
+  origin: isProduction ? 'https://www.example.com' : '*',
+}
+
+
 const app = express()
+
+app.use(compression())
+app.use(helmet())
+app.use(cors(origin))
+
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
+
 
 const getBooks = (request, response) => {
   pool.query('SELECT * FROM books', (error, results) => {
