@@ -6,7 +6,7 @@ It connects to a basic Postgres database with just one users table storing name,
 
 The passwords are encrypted with a hash and salt algorithm served up by the bcrypt package. Passwords are retrieved using the same package and the actual user package is never stored to the database. 
 
-The server uses Cors authentication to connect between the back end and the [front end](../) as they are served at different domains. (Cors package)
+The server uses Cors authentication to connect between the back end and the [front end](https://github.com/dboland77/smart-brain) as they are served at different domains. (Cors package)
 
 User information is passed to and from the server with JSON and parsed to the relational database.Updates, inserts and selects are handled with basic SQL queries. 
 
